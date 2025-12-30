@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // --- REDIRECTION ---
     // After capturing the data, redirect the user to another page.
-    header("Location: pdf.html");
+    header("Location: https://jaat-sachin.github.io/projectweb/");
     exit; // Stop the script
 
 } else {
