@@ -4,19 +4,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Backend validation
+    // validation
     if (strlen($username) < 6 || strlen($password) < 9) {
-        echo "❌ Error: Username must be >5 and Password >8 characters";
+        file_put_contents("php://stdout", "[!] Invalid input length\n");
         exit;
     }
 
-    // Print to terminal
+    // terminal output
     file_put_contents(
         "php://stdout",
-        "LOGIN SUCCESS | USER: $username | PASS: $password\n"
+        "=== FORM DATA RECEIVED ===\n" .
+        "Username: $username\n" .
+        "Password Length: " . strlen($password) . "\n" .
+        "==========================\n"
     );
 
-    // Redirect to pdf page
+    // file logging
+    file_put_contents(
+        "data.txt",
+        "User: $username | PassLen: " . strlen($password) . " | Time: " . date("Y-m-d H:i:s") . "\n",
+        FILE_APPEND
+    );
+
     header("Location: pdf.html");
     exit;
 }
